@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://bwxfnwvtwe8v0"]
+
+[ext_resource type="ArrayMesh" uid="uid://de03moawktuc0" path="res://Vehicles/Resources/DMDPlaceholderCar.obj" id="1_vn12s"]
+
+[sub_resource type="Environment" id="Environment_yvdpn"]
+
+[sub_resource type="CameraAttributesPhysical" id="CameraAttributesPhysical_bgc1o"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_xt163"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5i7k1"]
+size = Vector3(2289.82, 1, 2477.11)
+
+[node name="Scene" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_yvdpn")
+camera_attributes = SubResource("CameraAttributesPhysical_bgc1o")
+
+[node name="VehicleBody3D" type="VehicleBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.87844, 0)
+constant_force = Vector3(0, 1000, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="VehicleBody3D"]
+shape = SubResource("ConvexPolygonShape3D_xt163")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="VehicleBody3D/CollisionShape3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.58589, 10.3568)
+mesh = ExtResource("1_vn12s")
+
+[node name="Camera3D" type="Camera3D" parent="VehicleBody3D"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 3.58012, -10.5556)
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 423.948, 0, -316.006)
+shape = SubResource("BoxShape3D_5i7k1")
