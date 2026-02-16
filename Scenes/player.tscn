@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://bwxfnwvtwe8v0"]
+
+[ext_resource type="Script" uid="uid://bgyqyjf40w8i4" path="res://Vehicles/Scripts/car.cs" id="1_v0iea"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cvnsp"]
+size = Vector3(2.2803955, 1.868042, 4.82666)
+
+[node name="VehicleBody3D" type="VehicleBody3D" unique_id=1879360136]
+constant_force = Vector3(0, 1000, 0)
+script = ExtResource("1_v0iea")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=205051154]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.64019775, 0.434021, -1.9133301)
+shape = SubResource("BoxShape3D_cvnsp")
+
+[node name="FrontPassengerWheel" type="VehicleWheel3D" parent="." unique_id=1717017319]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4992025, -0.41115406, 0)
+use_as_steering = true
+
+[node name="FrontDriverWheel" type="VehicleWheel3D" parent="." unique_id=9165611]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7588849, -0.41115406, 0)
+use_as_steering = true
+
+[node name="FrontPassengerWheel2" type="VehicleWheel3D" parent="." unique_id=1443095352]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4992025, -0.41115406, -4.2759943)
+use_as_traction = true
+
+[node name="FrontDriverWheel2" type="VehicleWheel3D" parent="." unique_id=2091817149]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7588849, -0.41115406, -4.2759943)
+use_as_traction = true
+
+[node name="CameraPivot" type="Node3D" parent="." unique_id=1438976790]
+top_level = true
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot" unique_id=1232867108]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 3.58012, -10.5556)
