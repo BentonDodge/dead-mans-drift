@@ -8,15 +8,11 @@ background_color = Color(0.4106464, 0.00011633203, 0.4106434, 1)
 ambient_light_color = Color(0.6156863, 0, 0.5254902, 1)
 ambient_light_energy = 2.0
 
-[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_2o727"]
-
-[sub_resource type="Compositor" id="Compositor_uo1fs"]
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_wduq8"]
 size = Vector3(2000, 1, 2000)
 
 [sub_resource type="BoxMesh" id="BoxMesh_wduq8"]
-size = Vector3(2000, 1, 2000)
+size = Vector3(2000, 2, 2000)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2o727"]
 size = Vector3(5, 20, 5)
@@ -24,32 +20,50 @@ size = Vector3(5, 20, 5)
 [sub_resource type="BoxMesh" id="BoxMesh_2o727"]
 size = Vector3(5, 20, 5)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_uo1fs"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_7bloo"]
+
 [node name="Tutorial" type="Node3D" unique_id=565982458]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2015769653]
 environment = SubResource("Environment_wduq8")
-camera_attributes = SubResource("CameraAttributesPractical_2o727")
-compositor = SubResource("Compositor_uo1fs")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=824591858]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.0904493, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.7713046, 0)
+axis_lock_linear_y = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=77883774]
 shape = SubResource("BoxShape3D_wduq8")
 debug_color = Color(0.93623084, 0.21086964, 0.3665527, 0.41960785)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D" unique_id=1155522612]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.8078341, 0)
 mesh = SubResource("BoxMesh_wduq8")
 
 [node name="Box" type="StaticBody3D" parent="." unique_id=1714756262]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.457122, -4.0904493, 28.22831)
+transform = Transform3D(0.96710813, -0.25436565, 0, 0.24755043, 0.9411964, 0.22993085, -0.05848651, -0.22236799, 0.973207, 15.457122, 2.615254, 28.22831)
+axis_lock_linear_y = true
 
 [node name="box" type="CollisionShape3D" parent="Box" unique_id=755623625]
 shape = SubResource("BoxShape3D_2o727")
 debug_color = Color(0.93623084, 0.21086964, 0.3665527, 0.41960785)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Box/box" unique_id=573264356]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.78918934, 10.597826, 2.7521324)
 mesh = SubResource("BoxMesh_2o727")
 
-[node name="Node3D" parent="." unique_id=1251147101 instance=ExtResource("1_wduq8")]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1130759665]
+transform = Transform3D(1, 0, 0, 0, 0.99888986, 0.047106452, 0, -0.047106452, 0.99888986, 0, 200, 0)
+light_color = Color(1, 1, 0, 1)
+shadow_enabled = true
+
+[node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=1871265038]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12.709426)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=1301094297]
+shape = SubResource("BoxShape3D_uo1fs")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D/CollisionShape3D" unique_id=323275979]
+mesh = SubResource("BoxMesh_7bloo")
+
+[node name="Player" parent="." unique_id=1896630815 instance=ExtResource("1_wduq8")]
