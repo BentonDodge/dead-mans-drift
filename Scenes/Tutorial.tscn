@@ -12,7 +12,7 @@ ambient_light_energy = 2.0
 size = Vector3(2000, 1, 2000)
 
 [sub_resource type="BoxMesh" id="BoxMesh_wduq8"]
-size = Vector3(2000, 2, 2000)
+size = Vector3(2000, 1, 2000)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2o727"]
 size = Vector3(5, 20, 5)
@@ -38,7 +38,6 @@ shape = SubResource("BoxShape3D_wduq8")
 debug_color = Color(0.93623084, 0.21086964, 0.3665527, 0.41960785)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D" unique_id=1155522612]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.8078341, 0)
 mesh = SubResource("BoxMesh_wduq8")
 
 [node name="Box" type="StaticBody3D" parent="." unique_id=1714756262]
@@ -51,6 +50,12 @@ debug_color = Color(0.93623084, 0.21086964, 0.3665527, 0.41960785)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Box/box" unique_id=573264356]
 mesh = SubResource("BoxMesh_2o727")
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="." unique_id=1663770702]
+transform = Transform3D(1, 0, 0, 0, -0.99999845, 0.0017453741, 0, -0.0017453741, -0.99999845, 0, 399.77795, -9.42129)
+light_color = Color(0, 1, 1, 1)
+light_energy = 0.2
+shadow_enabled = true
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1130759665]
 transform = Transform3D(1, 0, 0, 0, 0.99888986, 0.047106452, 0, -0.047106452, 0.99888986, 0, 200, 0)
@@ -67,3 +72,4 @@ shape = SubResource("BoxShape3D_uo1fs")
 mesh = SubResource("BoxMesh_7bloo")
 
 [node name="Player" parent="." unique_id=1896630815 instance=ExtResource("1_wduq8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
