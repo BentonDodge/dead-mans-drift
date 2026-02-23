@@ -22,6 +22,8 @@ public partial class car : VehicleBody3D
 	private const float AirDensity = 1.225f;
 	
 	Vector3 _lookat = new Vector3();
+
+	private float _cameraRotation = 10f;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready(){
 		ApplyCentralImpulse(Vector3.Up * 0.01f);
@@ -30,46 +32,46 @@ public partial class car : VehicleBody3D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(double delta)
 	{
-		Steering = (float) Mathf.MoveToward(Steering, Input.GetAxis("ui_right", "ui_left")* _maxSteer, delta );
+		//Main Stuff
+		Steering = (float) Mathf.MoveToward(Steering, Input.GetAxis("right", "left")* _maxSteer, delta );
+		EngineForce = (_maxEngineForce * Input.GetAxis("back", "forward")) - (_crr * Mass * 9.81f); //Rolling Resistance
 		
+		//Resistances
 		Vector3 drag = -LinearVelocity.Normalized() * LinearVelocity.LengthSquared() * _cd * _fArea * AirDensity/2f; 
 		Vector3 downForce = -GlobalTransform.Basis.Y *  AirDensity * _cl * _fArea * LinearVelocity.LengthSquared()/2f;
-		ApplyCentralForce(drag);
-		ApplyCentralForce(downForce);
+		ApplyCentralForce(drag + downForce);
 		
-		if (Input.IsActionJustPressed("NOS"))
-		{
+		//NOS & Handbrake
+		if (Input.IsActionJustPressed("NOS")) {
 			_maxEngineForce = _maxEngineForce * _NOSAffect;
+			_camera.Fov = _camera.Fov + 10 * _NOSAffect ;
 		}else if (Input.IsActionJustReleased("NOS"))
 		{
 			_maxEngineForce = _maxEngineForce / _NOSAffect;
+			_camera.Fov = _camera.Fov - 10 * _NOSAffect;
+			
 		}
-
 		if (Input.IsActionPressed("hand_brake"))
 		{
 			_rightRearWheel.Brake = 5f;
 			_leftRearWheel.Brake = 5f;
 			_leftRearWheel.SetFrictionSlip(0.2f);
 			_leftRearWheel.SetFrictionSlip(0.2f);
-			GD.Print("hand");
+			_cameraRotation = 2f;
 		}else {
 			_rightRearWheel.Brake = 0f;
 			_leftRearWheel.Brake = 0f;
 			_leftRearWheel.SetFrictionSlip(1f);
 			_leftRearWheel.SetFrictionSlip(1f);
+			_cameraRotation = 10f;
 		}
-
-		// if (LinearVelocity.Length() >= _maxEngineSpeed) {
-		EngineForce = (_maxEngineForce * Input.GetAxis("ui_down", "ui_up")); //- (_crr * Mass * 9.81f); //Rolling Resistance
-		// GD.Print(LinearVelocity.Length());
-		// }
 		
-		
-		// Camera stuff from random tutorial
+		//Camera stuff
 		 _cameraPivot.GlobalPosition = GlobalPosition;
-		 _cameraPivot.GlobalTransform = _cameraPivot.Transform.InterpolateWith(Transform, (float)(delta * 20));
-		 // _camera.GlobalPosition = _cameraPivot.GlobalPosition;
-		 _lookat = _lookat.Lerp(GlobalPosition + LinearVelocity, (float)(delta * 20));
+		 _cameraPivot.GlobalTransform = _cameraPivot.Transform.InterpolateWith(Transform, (float)(delta * _cameraRotation));
+		 _lookat = _lookat.Lerp(GlobalPosition + LinearVelocity.Normalized(), (float)(delta * 20));
 		 _camera.LookAt(_lookat);
+		 
+		
 	}
 }

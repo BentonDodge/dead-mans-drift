@@ -11,14 +11,20 @@ ambient_light_energy = 2.0
 [sub_resource type="BoxShape3D" id="BoxShape3D_wduq8"]
 size = Vector3(2000, 1, 2000)
 
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wduq8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2o727"]
+roughness_texture = SubResource("NoiseTexture2D_wduq8")
+
 [sub_resource type="BoxMesh" id="BoxMesh_wduq8"]
+material = SubResource("StandardMaterial3D_2o727")
 size = Vector3(2000, 1, 2000)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2o727"]
-size = Vector3(5, 20, 5)
+size = Vector3(15, 20, 5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_2o727"]
-size = Vector3(5, 20, 5)
+size = Vector3(15, 20, 5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_uo1fs"]
 
@@ -38,13 +44,15 @@ shape = SubResource("BoxShape3D_wduq8")
 debug_color = Color(0.93623084, 0.21086964, 0.3665527, 0.41960785)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D" unique_id=1155522612]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.52597904, -0.1681118, -1.7157164)
 mesh = SubResource("BoxMesh_wduq8")
 
 [node name="Box" type="StaticBody3D" parent="." unique_id=1714756262]
-transform = Transform3D(0.96710813, -0.25436565, 0, 0.24755043, 0.9411964, 0.22993085, -0.05848651, -0.22236799, 0.973207, 15.457122, 2.615254, 28.22831)
+transform = Transform3D(1, 0, 0, 0, 0.25881904, -0.9659257, 0, 0.9659257, 0.25881904, 25.699978, -4.525402, 28.22831)
 axis_lock_linear_y = true
 
 [node name="box" type="CollisionShape3D" parent="Box" unique_id=755623625]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.624878, 0, 0)
 shape = SubResource("BoxShape3D_2o727")
 debug_color = Color(0.93623084, 0.21086964, 0.3665527, 0.41960785)
 
@@ -72,4 +80,4 @@ shape = SubResource("BoxShape3D_uo1fs")
 mesh = SubResource("BoxMesh_7bloo")
 
 [node name="Player" parent="." unique_id=1896630815 instance=ExtResource("1_wduq8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+_maxEngineForce = 500.0
