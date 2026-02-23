@@ -3,6 +3,11 @@
 [ext_resource type="Script" uid="uid://bgyqyjf40w8i4" path="res://Vehicles/Scripts/car.cs" id="1_v0iea"]
 [ext_resource type="ArrayMesh" uid="uid://de03moawktuc0" path="res://Vehicles/Resources/DMDPlaceholderCar.obj" id="2_cvnsp"]
 
+[sub_resource type="CylinderMesh" id="CylinderMesh_cvnsp"]
+top_radius = 0.93
+bottom_radius = 0.93
+height = 0.8
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_0hbge"]
 size = Vector3(4.422576, 2.5, 13)
 
@@ -24,8 +29,10 @@ suspension_stiffness = 30.0
 damping_compression = 0.88
 
 [node name="Wheel1" type="MeshInstance3D" parent="FrontDriverSideWheel" unique_id=985302115]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
 layers = 2
 gi_mode = 2
+mesh = SubResource("CylinderMesh_cvnsp")
 
 [node name="RearDriverSideWheel" type="VehicleWheel3D" parent="." unique_id=288998382]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2687554, -0.9573135, -3.6223)
@@ -35,9 +42,11 @@ wheel_friction_slip = 0.9
 suspension_stiffness = 30.0
 damping_compression = 0.88
 
-[node name="Wheel2" type="MeshInstance3D" parent="RearDriverSideWheel" unique_id=696567187]
+[node name="Wheel1" type="MeshInstance3D" parent="RearDriverSideWheel" unique_id=1765898105]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
 layers = 2
 gi_mode = 2
+mesh = SubResource("CylinderMesh_cvnsp")
 
 [node name="FrontPassengerSideWheel" type="VehicleWheel3D" parent="." unique_id=2012932203]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.342454, -0.9573135, 4.3370266)
@@ -48,9 +57,11 @@ wheel_friction_slip = 0.9
 suspension_stiffness = 30.0
 damping_compression = 0.88
 
-[node name="Wheel3" type="MeshInstance3D" parent="FrontPassengerSideWheel" unique_id=1677629445]
+[node name="Wheel1" type="MeshInstance3D" parent="FrontPassengerSideWheel" unique_id=176365838]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
 layers = 2
 gi_mode = 2
+mesh = SubResource("CylinderMesh_cvnsp")
 
 [node name="RearPassengerSideWheel" type="VehicleWheel3D" parent="." unique_id=51591877]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.342454, -0.9573135, -3.6223)
@@ -60,9 +71,11 @@ wheel_friction_slip = 0.9
 suspension_stiffness = 30.0
 damping_compression = 0.88
 
-[node name="Wheel4" type="MeshInstance3D" parent="RearPassengerSideWheel" unique_id=216208640]
+[node name="Wheel1" type="MeshInstance3D" parent="RearPassengerSideWheel" unique_id=833102398]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
 layers = 2
 gi_mode = 2
+mesh = SubResource("CylinderMesh_cvnsp")
 
 [node name="Body" type="MeshInstance3D" parent="." unique_id=1079623300]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6277319, 10.588767)
