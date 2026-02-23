@@ -11,6 +11,9 @@ public partial class car : VehicleBody3D
 	[Export] float _crr= 0.02f;//Normal 0.01-0.03
 	[Export] float _fArea = 2f;//frontal Area
 	[Export] private float _NOSAffect = 2f;
+	
+	private float _NOSEngineForce;
+	private float _NOSCameraFOV;
 
 	[Export] Node3D _cameraPivot;
 	[Export] Camera3D _camera;
@@ -20,12 +23,16 @@ public partial class car : VehicleBody3D
 	[Export] private VehicleWheel3D _leftRearWheel;
 
 	private const float AirDensity = 1.225f;
-	
+
+	private bool _doubleJump = true;
 	Vector3 _lookat = new Vector3();
 
 	private float _cameraRotation = 10f;
 	// Called when the node enters the scene tree for the first time.
-	public override void _Ready(){
+	public override void _Ready()
+	{
+		_NOSEngineForce = _NOSAffect * _maxEngineForce;
+		_NOSCameraFOV = _camera.Fov + 10 * _NOSAffect;
 		ApplyCentralImpulse(Vector3.Up * 0.01f);
 		Freeze = false;
 	}
@@ -42,19 +49,15 @@ public partial class car : VehicleBody3D
 		ApplyCentralForce(drag + downForce);
 		
 		//NOS & Handbrake
-		if (Input.IsActionJustPressed("NOS"))
+		if (Input.IsActionPressed("NOS"))
 		{
-			_maxEngineForce = _maxEngineForce * _NOSAffect; 
-			//(float) Mathf.MoveToward(_maxEngineForce, _maxEngineForce * _NOSAffect, delta * 5) ;
-			_camera.Fov = _camera.Fov + 10 * _NOSAffect;
-			//(float) Mathf.MoveToward(_camera.Fov, _camera.Fov + 10 * _NOSAffect, delta * 5) ;
-		}else if(Input.IsActionJustReleased("NOS"))
-		{
-			_maxEngineForce = _maxEngineForce / _NOSAffect; 
-			//(float) Mathf.MoveToward(_maxEngineForce, _maxEngineForce * _NOSAffect, delta * 5) ;
-			_camera.Fov = _camera.Fov - 10 * _NOSAffect;
-			//(float) Mathf.MoveToward(_camera.Fov, _camera.Fov + 10 * _NOSAffect, delta * 5) ;
+			_maxEngineForce = (float) Mathf.MoveToward(_maxEngineForce, _NOSEngineForce, delta * 20) ;
+			_camera.Fov = (float) Mathf.MoveToward(_camera.Fov, _NOSCameraFOV, delta * 20) ;
+		}else { 
+		_maxEngineForce = (float) Mathf.MoveToward(_maxEngineForce, _NOSEngineForce / _NOSAffect, delta * 15) ; 
+		_camera.Fov = (float) Mathf.MoveToward(_camera.Fov, _NOSCameraFOV - 10 * _NOSAffect, delta * 15) ;
 		}
+	
 		if (Input.IsActionPressed("hand_brake"))
 		{
 			_rightRearWheel.Brake = 5f;
@@ -70,12 +73,18 @@ public partial class car : VehicleBody3D
 			_cameraRotation = 10f;
 		}
 		
-		if (Input.IsActionJustPressed("jump"))
+		if (Input.IsActionJustPressed("jump") && wheelsInContact())
 		{
-			ApplyCentralImpulse(new Vector3(0,500,0));
+			_doubleJump = true;
+			ApplyCentralImpulse(new Vector3(0,500,0) * GlobalTransform.Inverse() - downForce);
+		}else if (_doubleJump && Input.IsActionJustPressed("jump"))
+		{
+			_doubleJump = false;
+			ApplyCentralImpulse(new Vector3(0,250,0) * GlobalTransform.Inverse() - downForce);
+			// backflip();
 		}
 
-		
+
 		//Camera stuff
 		 _cameraPivot.GlobalPosition = GlobalPosition;
 		 _cameraPivot.GlobalTransform = _cameraPivot.Transform.InterpolateWith(Transform, (float)(delta * _cameraRotation));
@@ -83,5 +92,18 @@ public partial class car : VehicleBody3D
 		 _camera.LookAt(_lookat);
 		 
 		
+	}
+
+	bool wheelsInContact() {
+		foreach (Node child in GetChildren()) {
+				if (child is VehicleWheel3D wheel)
+				{
+					if (!wheel.IsInContact())
+					{
+						return false;
+					}
+				}
+			}
+		return true;
 	}
 }
