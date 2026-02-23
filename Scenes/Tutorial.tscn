@@ -44,7 +44,6 @@ shape = SubResource("BoxShape3D_wduq8")
 debug_color = Color(0.93623084, 0.21086964, 0.3665527, 0.41960785)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D" unique_id=1155522612]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.52597904, -0.1681118, -1.7157164)
 mesh = SubResource("BoxMesh_wduq8")
 
 [node name="Box" type="StaticBody3D" parent="." unique_id=1714756262]

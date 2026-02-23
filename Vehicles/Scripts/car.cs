@@ -42,14 +42,18 @@ public partial class car : VehicleBody3D
 		ApplyCentralForce(drag + downForce);
 		
 		//NOS & Handbrake
-		if (Input.IsActionJustPressed("NOS")) {
-			_maxEngineForce = _maxEngineForce * _NOSAffect;
-			_camera.Fov = _camera.Fov + 10 * _NOSAffect ;
-		}else if (Input.IsActionJustReleased("NOS"))
+		if (Input.IsActionJustPressed("NOS"))
 		{
-			_maxEngineForce = _maxEngineForce / _NOSAffect;
+			_maxEngineForce = _maxEngineForce * _NOSAffect; 
+			//(float) Mathf.MoveToward(_maxEngineForce, _maxEngineForce * _NOSAffect, delta * 5) ;
+			_camera.Fov = _camera.Fov + 10 * _NOSAffect;
+			//(float) Mathf.MoveToward(_camera.Fov, _camera.Fov + 10 * _NOSAffect, delta * 5) ;
+		}else if(Input.IsActionJustReleased("NOS"))
+		{
+			_maxEngineForce = _maxEngineForce / _NOSAffect; 
+			//(float) Mathf.MoveToward(_maxEngineForce, _maxEngineForce * _NOSAffect, delta * 5) ;
 			_camera.Fov = _camera.Fov - 10 * _NOSAffect;
-			
+			//(float) Mathf.MoveToward(_camera.Fov, _camera.Fov + 10 * _NOSAffect, delta * 5) ;
 		}
 		if (Input.IsActionPressed("hand_brake"))
 		{
@@ -65,6 +69,12 @@ public partial class car : VehicleBody3D
 			_leftRearWheel.SetFrictionSlip(1f);
 			_cameraRotation = 10f;
 		}
+		
+		if (Input.IsActionJustPressed("jump"))
+		{
+			ApplyCentralImpulse(new Vector3(0,500,0));
+		}
+
 		
 		//Camera stuff
 		 _cameraPivot.GlobalPosition = GlobalPosition;

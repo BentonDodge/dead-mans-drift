@@ -13,6 +13,7 @@ size = Vector3(4.422576, 2.5, 13)
 
 [node name="Body" type="VehicleBody3D" unique_id=947025801 node_paths=PackedStringArray("_cameraPivot", "_camera", "_rightRearWheel", "_leftRearWheel")]
 center_of_mass_mode = 1
+center_of_mass = Vector3(0, 0, 0.4)
 script = ExtResource("1_v0iea")
 _cameraPivot = NodePath("CameraPivot")
 _camera = NodePath("CameraPivot/Camera3D")
