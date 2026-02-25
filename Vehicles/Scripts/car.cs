@@ -8,7 +8,7 @@ public partial class car : VehicleBody3D
 	[Export] float _maxEngineForce = 200;
 	[Export] float _cd = 0.4f;//Coefficient of Drag
 	[Export] float _cl = 1.2f;//Coefficient of Lift
-	[Export] float _crr= 0.02f;//Normal 0.01-0.03
+	[Export] float _crr= 0.02f;//Coefficient of Rolling Resistance (Normal 0.01-0.03)
 	[Export] float _fArea = 2f;//frontal Area
 	[Export] private float _NOSAffect = 2f;
 	
@@ -41,7 +41,7 @@ public partial class car : VehicleBody3D
 	{
 		//Main Stuff
 		Steering = (float) Mathf.MoveToward(Steering, Input.GetAxis("right", "left")* _maxSteer, delta );
-		EngineForce = (_maxEngineForce * Input.GetAxis("back", "forward")) - (_crr * Mass * 9.81f); //Rolling Resistance
+		EngineForce = (_maxEngineForce * Input.GetAxis("back", "forward"));//-(_crr * Mass * 9.81f); Rolling Resistance
 		
 		//Resistances
 		Vector3 drag = -LinearVelocity.Normalized() * LinearVelocity.LengthSquared() * _cd * _fArea * AirDensity/2f; 
@@ -73,7 +73,7 @@ public partial class car : VehicleBody3D
 			_cameraRotation = 10f;
 		}
 		
-		if (Input.IsActionJustPressed("jump") && wheelsInContact())
+		if (Input.IsActionJustPressed("jump") && WheelsInContact())
 		{
 			_doubleJump = true;
 			ApplyCentralImpulse(new Vector3(0,500,0) * GlobalTransform.Inverse() - downForce);
@@ -94,7 +94,7 @@ public partial class car : VehicleBody3D
 		
 	}
 
-	bool wheelsInContact() {
+	bool WheelsInContact() {
 		foreach (Node child in GetChildren()) {
 				if (child is VehicleWheel3D wheel)
 				{
