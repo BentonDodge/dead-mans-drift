@@ -1,16 +1,21 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class car : VehicleBody3D
 {
 	[Export] float _maxSteer = 0.3f;
-	[Export] float _maxEngineSpeed = 500;
+	[Export] float _maxEngineRevs = 8000;
 	[Export] float _maxEngineForce = 200;
 	[Export] float _cd = 0.4f;//Coefficient of Drag
 	[Export] float _cl = 1.2f;//Coefficient of Lift
 	[Export] float _crr= 0.02f;//Coefficient of Rolling Resistance (Normal 0.01-0.03)
 	[Export] float _fArea = 2f;//frontal Area
 	[Export] private float _NOSAffect = 2f;
+
+	[Export] private float[] gears = [] ;
+	private int currentGear = 0;
+	private float revs;
 	
 	private float _NOSEngineForce;
 	private float _NOSCameraFOV;
@@ -64,13 +69,13 @@ public partial class car : VehicleBody3D
 			_leftRearWheel.Brake = 5f;
 			_leftRearWheel.SetFrictionSlip(0.2f);
 			_leftRearWheel.SetFrictionSlip(0.2f);
-			_cameraRotation = 2f;
+			_cameraRotation = 4f;
 		}else {
 			_rightRearWheel.Brake = 0f;
 			_leftRearWheel.Brake = 0f;
 			_leftRearWheel.SetFrictionSlip(1f);
 			_leftRearWheel.SetFrictionSlip(1f);
-			_cameraRotation = 10f;
+			_cameraRotation = 7f;
 		}
 		
 		if (Input.IsActionJustPressed("jump") && WheelsInContact())
@@ -88,7 +93,7 @@ public partial class car : VehicleBody3D
 		//Camera stuff
 		 _cameraPivot.GlobalPosition = GlobalPosition;
 		 _cameraPivot.GlobalTransform = _cameraPivot.Transform.InterpolateWith(Transform, (float)(delta * _cameraRotation));
-		 _lookat = _lookat.Lerp(GlobalPosition + LinearVelocity.Normalized(), (float)(delta * 20));
+		 _lookat = _lookat.Lerp(GlobalPosition + LinearVelocity.Normalized(), (float)(delta * 10));
 		 _camera.LookAt(_lookat);
 		 
 		
