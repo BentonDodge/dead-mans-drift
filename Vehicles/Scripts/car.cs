@@ -11,14 +11,16 @@ public partial class car : VehicleBody3D
 	[Export] float _cl = 1.2f;//Coefficient of Lift
 	[Export] float _crr= 0.02f;//Coefficient of Rolling Resistance (Normal 0.01-0.03)
 	[Export] float _fArea = 2f;//frontal Area
-	[Export] private float _NOSAffect = 2f;
+	[Export] private float _nosAffect = 2f;
 
-	[Export] private float[] gears = [] ;
-	private int currentGear = 0;
-	private float revs;
+	[Export] Curve _powerCurve;
+	[Export] private float[] _gears = [] ;
+	private int _currentGear = 0;
+	private float _revs;
+	private float _finalDrive = 3.38f;
 	
-	private float _NOSEngineForce;
-	private float _NOSCameraFOV;
+	private float _nosEngineForce;
+	private float _nosCameraFov;
 
 	[Export] Node3D _cameraPivot;
 	[Export] Camera3D _camera;
@@ -36,9 +38,12 @@ public partial class car : VehicleBody3D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		_NOSEngineForce = _NOSAffect * _maxEngineForce;
-		_NOSCameraFOV = _camera.Fov + 10 * _NOSAffect;
-		ApplyCentralImpulse(Vector3.Up * 0.01f);
+		// _powerCurve.PointCount = (int)(_maxEngineRevs / 10f);
+		// _powerCurve.MaxDomain = _maxEngineRevs;
+		// _powerCurve.MaxValue = _maxEngineRevs;
+		_nosEngineForce = _nosAffect * _maxEngineForce;
+		_nosCameraFov = _camera.Fov + 10 * _nosAffect;
+		// ApplyCentralImpulse(Vector3.Up * 0.01f);
 		Freeze = false;
 	}
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -46,7 +51,6 @@ public partial class car : VehicleBody3D
 	{
 		//Main Stuff
 		Steering = (float) Mathf.MoveToward(Steering, Input.GetAxis("right", "left")* _maxSteer, delta );
-		EngineForce = (_maxEngineForce * Input.GetAxis("back", "forward"));//-(_crr * Mass * 9.81f); Rolling Resistance
 		
 		//Resistances
 		Vector3 drag = -LinearVelocity.Normalized() * LinearVelocity.LengthSquared() * _cd * _fArea * AirDensity/2f; 
@@ -56,11 +60,11 @@ public partial class car : VehicleBody3D
 		//NOS & Handbrake
 		if (Input.IsActionPressed("NOS"))
 		{
-			_maxEngineForce = (float) Mathf.MoveToward(_maxEngineForce, _NOSEngineForce, delta * 20) ;
-			_camera.Fov = (float) Mathf.MoveToward(_camera.Fov, _NOSCameraFOV, delta * 20) ;
+			_maxEngineForce = (float) Mathf.MoveToward(_maxEngineForce, _nosEngineForce, delta * 20) ;
+			_camera.Fov = (float) Mathf.MoveToward(_camera.Fov, _nosCameraFov, delta * 20) ;
 		}else { 
-		_maxEngineForce = (float) Mathf.MoveToward(_maxEngineForce, _NOSEngineForce / _NOSAffect, delta * 15) ; 
-		_camera.Fov = (float) Mathf.MoveToward(_camera.Fov, _NOSCameraFOV - 10 * _NOSAffect, delta * 15) ;
+		_maxEngineForce = (float) Mathf.MoveToward(_maxEngineForce, _nosEngineForce / _nosAffect, delta * 15) ; 
+		_camera.Fov = (float) Mathf.MoveToward(_camera.Fov, _nosCameraFov - 10 * _nosAffect, delta * 15) ;
 		}
 	
 		if (Input.IsActionPressed("hand_brake"))
@@ -96,7 +100,7 @@ public partial class car : VehicleBody3D
 		 _lookat = _lookat.Lerp(GlobalPosition + LinearVelocity.Normalized(), (float)(delta * 10));
 		 _camera.LookAt(_lookat);
 		 
-		
+		 EngineForce = CalculateEngineForce(delta);//-(_crr * Mass * 9.81f); Rolling Resistance
 	}
 
 	bool WheelsInContact() {
@@ -110,5 +114,27 @@ public partial class car : VehicleBody3D
 				}
 			}
 		return true;
+	}
+
+	float CalculateEngineForce(double delta)
+	{
+	    if(Input.IsActionJustPressed("shift up"))
+	    {
+		    _currentGear++;
+	    }else if (Input.IsActionJustPressed("shift down"))
+        {
+	        _currentGear--;
+        }
+
+        _revs = Mathf.Lerp(_revs, _maxEngineRevs * Input.GetAxis("back", "forward"), (float)(delta * 5));
+        GD.Print(_revs + " revs " + _currentGear + " current gear " + LinearVelocity.Length() + " Velocity");
+        
+        return (
+	        _powerCurve.SampleBaked(_revs) *
+	        Input.GetAxis("back", "forward") * 
+	        _finalDrive * 
+	        _gears[_currentGear] * 
+	        _maxEngineForce
+			);
 	}
 }
