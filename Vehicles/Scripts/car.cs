@@ -15,7 +15,7 @@ public partial class car : VehicleBody3D
 
 	[Export] Curve _powerCurve;
 	[Export] private float[] _gears = [] ;
-	private int _currentGear = 0;
+	private int _currentGear = 1;
 	private float _revs;
 	private float _finalDrive = 3.38f;
 	
@@ -55,7 +55,7 @@ public partial class car : VehicleBody3D
 		//Resistances
 		Vector3 drag = -LinearVelocity.Normalized() * LinearVelocity.LengthSquared() * _cd * _fArea * AirDensity/2f; 
 		Vector3 downForce = -GlobalTransform.Basis.Y *  AirDensity * _cl * _fArea * LinearVelocity.LengthSquared()/2f;
-		ApplyCentralForce(drag + downForce);
+		ApplyCentralForce(drag +downForce);
 		
 		//NOS & Handbrake
 		if (Input.IsActionPressed("NOS"))
@@ -89,7 +89,7 @@ public partial class car : VehicleBody3D
 		}else if (_doubleJump && Input.IsActionJustPressed("jump"))
 		{
 			_doubleJump = false;
-			ApplyCentralImpulse(new Vector3(0,250,0) * GlobalTransform.Inverse() - downForce);
+			// ApplyCentralImpulse(new Vector3(0,250,0) * GlobalTransform.Inverse() - downForce);
 			// backflip();
 		}
 
@@ -115,19 +115,31 @@ public partial class car : VehicleBody3D
 			}
 		return true;
 	}
+	
+	float WheelsRPM()
+	{
+		float avgRPM = 0;
+		foreach (Node child in GetChildren()) {
+			if (child is VehicleWheel3D wheel)
+			{
+				avgRPM += wheel.GetRpm();
+			}
+		}
+		return avgRPM/4f;
+	}
 
 	float CalculateEngineForce(double delta)
 	{
-	    if(Input.IsActionJustPressed("shift up"))
+	    if(Input.IsActionJustPressed("shift up") && _currentGear < _gears.Length - 1)
 	    {
 		    _currentGear++;
-	    }else if (Input.IsActionJustPressed("shift down"))
+	    }else if (Input.IsActionJustPressed("shift down") && _currentGear > 0)
         {
 	        _currentGear--;
         }
 
         _revs = Mathf.Lerp(_revs, _maxEngineRevs * Input.GetAxis("back", "forward"), (float)(delta * 5));
-        GD.Print(_revs + " revs " + _currentGear + " current gear " + LinearVelocity.Length() + " Velocity");
+        GD.Print(" revs " + _revs+ " current gear " + _gears[_currentGear] + " Velocity " + LinearVelocity.Length());
         
         return (
 	        _powerCurve.SampleBaked(_revs) *
