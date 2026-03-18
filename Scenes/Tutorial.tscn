@@ -32,7 +32,7 @@ size = Vector3(15, 20, 5)
 
 [sub_resource type="Curve" id="Curve_wduq8"]
 _limits = [0.0, 500.0, 0.0, 8000.0]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(7747.369, 500), 0.0, 0.0, 0, 0, Vector2(8000, 438.20227), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 16.853943), 0.0, 0.0, 0, 0, Vector2(7747.369, 500), 0.0, 0.0, 0, 0, Vector2(8000, 438.20227), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [node name="Tutorial" type="Node3D" unique_id=565982458]

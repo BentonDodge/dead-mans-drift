@@ -133,9 +133,16 @@ public partial class car : VehicleBody3D
 	    if(Input.IsActionJustPressed("shift up") && _currentGear < _gears.Length - 1)
 	    {
 		    _currentGear++;
+		    _revs *= (_gears[_currentGear]/_gears[_currentGear - 1]);
 	    }else if (Input.IsActionJustPressed("shift down") && _currentGear > 0)
         {
 	        _currentGear--;
+	        if (((_gears[_currentGear] / _gears[_currentGear + 1]) * _revs) < _maxEngineRevs) {
+		        _revs *= (_gears[_currentGear]/_gears[_currentGear + 1]);   
+	        }
+	        else {
+		        //TODO remove health?
+	        }
         }
 
         _revs = Mathf.Lerp(_revs, _maxEngineRevs * Input.GetAxis("back", "forward"), (float)(delta * 5));
