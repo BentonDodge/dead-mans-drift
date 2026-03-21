@@ -9,7 +9,7 @@ ambient_light_color = Color(0.6156863, 0, 0.5254902, 1)
 ambient_light_energy = 2.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_wduq8"]
-size = Vector3(2000, 1, 2000)
+size = Vector3(10000, 1, 1000)
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wduq8"]
 
@@ -18,7 +18,7 @@ roughness_texture = SubResource("NoiseTexture2D_wduq8")
 
 [sub_resource type="BoxMesh" id="BoxMesh_wduq8"]
 material = SubResource("StandardMaterial3D_2o727")
-size = Vector3(2000, 1, 2000)
+size = Vector3(10000, 1, 1000)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2o727"]
 size = Vector3(15, 20, 5)
@@ -31,8 +31,7 @@ size = Vector3(15, 20, 5)
 [sub_resource type="BoxMesh" id="BoxMesh_7bloo"]
 
 [sub_resource type="Curve" id="Curve_wduq8"]
-_limits = [0.0, 500.0, 0.0, 8000.0]
-_data = [Vector2(0, 16.853943), 0.0, 0.0, 0, 0, Vector2(7747.369, 500), 0.0, 0.0, 0, 0, Vector2(8000, 438.20227), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.868421, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.55056185), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [node name="Tutorial" type="Node3D" unique_id=565982458]
