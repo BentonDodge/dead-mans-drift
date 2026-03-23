@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://di5jxpyykbwvs"]
 
 [ext_resource type="PackedScene" uid="uid://bwxfnwvtwe8v0" path="res://Scenes/player.tscn" id="1_wduq8"]
+[ext_resource type="Script" uid="uid://bpvxvngerd3ew" path="res://Scenes/Tutorial.cs" id="1_wduq8"]
 
 [sub_resource type="Environment" id="Environment_wduq8"]
 background_mode = 1
@@ -86,3 +87,34 @@ mesh = SubResource("BoxMesh_7bloo")
 _maxEngineForce = 500.0
 _powerCurve = SubResource("Curve_wduq8")
 _gears = PackedFloat32Array(-3.3, 3.8, 2, 1.3, 0.98, 0.82, 0.63)
+[node name="Scene" type="Node3D" unique_id=287797492]
+script = ExtResource("1_wduq8")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1492809600]
+environment = SubResource("Environment_yvdpn")
+camera_attributes = SubResource("CameraAttributesPhysical_bgc1o")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=2100041095]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=395118236]
+
+[node name="Host" type="Button" parent="CanvasLayer" unique_id=466987060]
+offset_left = -2.0
+offset_top = 2.0
+offset_right = 529.0
+offset_bottom = 647.0
+text = "Host"
+
+[node name="Shooter" type="Button" parent="CanvasLayer" unique_id=1205574693]
+offset_left = 532.0
+offset_top = 312.0
+offset_right = 1152.0
+offset_bottom = 644.0
+text = "Join Shooter"
+
+[node name="Driver" type="Button" parent="CanvasLayer" unique_id=51280951]
+offset_left = 532.0
+offset_top = 1.0
+offset_right = 1152.0
+offset_bottom = 315.0
+text = "Join Driver"
