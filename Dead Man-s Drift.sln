@@ -1,6 +1,6 @@
 ﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dead Man-s Drift", "Dead Man-s Drift.csproj", "{CFC70560-10A3-4D2D-A058-4F6508EEB308}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dead Man-s Drift", "Dead Man-s Drift.csproj", "{541A9D0C-F776-4F58-9B2A-A0526A097800}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,11 +9,11 @@ Global
 	ExportRelease|Any CPU = ExportRelease|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{CFC70560-10A3-4D2D-A058-4F6508EEB308}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CFC70560-10A3-4D2D-A058-4F6508EEB308}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CFC70560-10A3-4D2D-A058-4F6508EEB308}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
-		{CFC70560-10A3-4D2D-A058-4F6508EEB308}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
-		{CFC70560-10A3-4D2D-A058-4F6508EEB308}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
-		{CFC70560-10A3-4D2D-A058-4F6508EEB308}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
+		{541A9D0C-F776-4F58-9B2A-A0526A097800}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{541A9D0C-F776-4F58-9B2A-A0526A097800}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{541A9D0C-F776-4F58-9B2A-A0526A097800}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
+		{541A9D0C-F776-4F58-9B2A-A0526A097800}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
+		{541A9D0C-F776-4F58-9B2A-A0526A097800}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
+		{541A9D0C-F776-4F58-9B2A-A0526A097800}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
 	EndGlobalSection
 EndGlobal
