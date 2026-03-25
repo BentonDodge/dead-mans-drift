@@ -1,6 +1,5 @@
 ﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dead Man-s Drift", "Dead Man-s Drift.csproj", "{ABF8F2F8-DD0B-4BD9-AD53-8B8CDCEA6067}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,11 +8,5 @@ Global
 	ExportRelease|Any CPU = ExportRelease|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{ABF8F2F8-DD0B-4BD9-AD53-8B8CDCEA6067}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ABF8F2F8-DD0B-4BD9-AD53-8B8CDCEA6067}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ABF8F2F8-DD0B-4BD9-AD53-8B8CDCEA6067}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
-		{ABF8F2F8-DD0B-4BD9-AD53-8B8CDCEA6067}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
-		{ABF8F2F8-DD0B-4BD9-AD53-8B8CDCEA6067}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
-		{ABF8F2F8-DD0B-4BD9-AD53-8B8CDCEA6067}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
 	EndGlobalSection
 EndGlobal
