@@ -15,8 +15,8 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="Dead Man's Drift"
-run/main_scene="res://Scenes/MainScene.tscn"
-config/features=PackedStringArray("4.6", "Forward Plus")
+run/main_scene="res://Scenes/Tutorial.tscn"
+config/features=PackedStringArray("4.6", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
 [dotnet]

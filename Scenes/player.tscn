@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://bwxfnwvtwe8v0"]
+[gd_scene format=3 uid="uid://b0q8uesddg7cs"]
 
 [ext_resource type="Script" uid="uid://bgyqyjf40w8i4" path="res://Vehicles/Scripts/car.cs" id="1_v0iea"]
 [ext_resource type="ArrayMesh" uid="uid://de03moawktuc0" path="res://Vehicles/Resources/DMDPlaceholderCar.obj" id="2_cvnsp"]
