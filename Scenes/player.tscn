@@ -1,0 +1,97 @@
+[gd_scene format=3 uid="uid://bwxfnwvtwe8v0"]
+
+[ext_resource type="Script" uid="uid://bgyqyjf40w8i4" path="res://Vehicles/Scripts/car.cs" id="1_v0iea"]
+[ext_resource type="ArrayMesh" uid="uid://de03moawktuc0" path="res://Vehicles/Resources/DMDPlaceholderCar.obj" id="2_cvnsp"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_cvnsp"]
+top_radius = 0.93
+bottom_radius = 0.93
+height = 0.8
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0hbge"]
+size = Vector3(4.422576, 2.5, 13)
+
+[node name="Body" type="VehicleBody3D" unique_id=947025801 node_paths=PackedStringArray("_cameraPivot", "_camera", "_rightRearWheel", "_leftRearWheel")]
+center_of_mass_mode = 1
+center_of_mass = Vector3(0, 0, 0.4)
+script = ExtResource("1_v0iea")
+gears = PackedFloat32Array(3.8, 2, 1.3, 0.975, 0.824, 0.634)
+_cameraPivot = NodePath("CameraPivot")
+_camera = NodePath("CameraPivot/Camera3D")
+_rightRearWheel = NodePath("RearPassengerSideWheel")
+_leftRearWheel = NodePath("RearDriverSideWheel")
+
+[node name="FrontDriverSideWheel" type="VehicleWheel3D" parent="." unique_id=787399239]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2687554, -0.9573135, 4.3370266)
+use_as_traction = true
+use_as_steering = true
+wheel_radius = 0.93
+wheel_friction_slip = 0.9
+suspension_stiffness = 30.0
+damping_compression = 0.88
+
+[node name="Wheel1" type="MeshInstance3D" parent="FrontDriverSideWheel" unique_id=985302115]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
+layers = 2
+gi_mode = 2
+mesh = SubResource("CylinderMesh_cvnsp")
+
+[node name="RearDriverSideWheel" type="VehicleWheel3D" parent="." unique_id=288998382]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2687554, -0.9573135, -3.6223)
+use_as_traction = true
+wheel_radius = 0.93
+wheel_friction_slip = 0.9
+suspension_stiffness = 30.0
+damping_compression = 0.88
+
+[node name="Wheel1" type="MeshInstance3D" parent="RearDriverSideWheel" unique_id=1765898105]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
+layers = 2
+gi_mode = 2
+mesh = SubResource("CylinderMesh_cvnsp")
+
+[node name="FrontPassengerSideWheel" type="VehicleWheel3D" parent="." unique_id=2012932203]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.342454, -0.9573135, 4.3370266)
+use_as_traction = true
+use_as_steering = true
+wheel_radius = 0.93
+wheel_friction_slip = 0.9
+suspension_stiffness = 30.0
+damping_compression = 0.88
+
+[node name="Wheel1" type="MeshInstance3D" parent="FrontPassengerSideWheel" unique_id=176365838]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
+layers = 2
+gi_mode = 2
+mesh = SubResource("CylinderMesh_cvnsp")
+
+[node name="RearPassengerSideWheel" type="VehicleWheel3D" parent="." unique_id=51591877]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.342454, -0.9573135, -3.6223)
+use_as_traction = true
+wheel_radius = 0.93
+wheel_friction_slip = 0.9
+suspension_stiffness = 30.0
+damping_compression = 0.88
+
+[node name="Wheel1" type="MeshInstance3D" parent="RearPassengerSideWheel" unique_id=833102398]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
+layers = 2
+gi_mode = 2
+mesh = SubResource("CylinderMesh_cvnsp")
+
+[node name="Body" type="MeshInstance3D" parent="." unique_id=1079623300]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6277319, 10.588767)
+layers = 2
+gi_mode = 2
+mesh = ExtResource("2_cvnsp")
+
+[node name="CameraPivot" type="Node3D" parent="." unique_id=1438976790]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8639846, -1.3519739)
+top_level = true
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot" unique_id=1232867108]
+transform = Transform3D(-1, 8.959764e-16, -8.742281e-08, -1.4489117e-08, 0.9861702, 0.16573614, 8.621376e-08, 0.16573614, -0.9861702, 0, 5.9494386, -14.4215555)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1848688526]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.040511608, 0.2751943, 0.23099999)
+shape = SubResource("BoxShape3D_0hbge")
