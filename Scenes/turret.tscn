@@ -14,6 +14,7 @@ _particles = NodePath("CPUParticles3D")
 [node name="Camera3D" type="Camera3D" parent="." unique_id=872203612]
 
 [node name="CPUParticles3D" type="CPUParticles3D" parent="." unique_id=84240638]
+top_level = true
 material_override = SubResource("StandardMaterial3D_n2xce")
 mesh = SubResource("SphereMesh_n2xce")
 emission_shape = 1
