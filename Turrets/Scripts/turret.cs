@@ -8,6 +8,7 @@ public partial class turret : Node3D
 	[Export] private CpuParticles3D _particles;
 	[Export] private float _cameraFov = 40f;
 	private float _cameraAngle = 0f;
+	private float recoil = 10f;
 	
 	
 	public override void _Ready() {
@@ -49,22 +50,33 @@ public partial class turret : Node3D
 				_camera.Rotation.Z
 			);
 		}else if (@event is InputEventMouseButton mouseButton) {
-			if (mouseButton.ButtonIndex == MouseButton.Left)
+			if (mouseButton.ButtonIndex == MouseButton.Left && mouseButton.Pressed)
 			{
 				var spaceState = GetWorld3D().DirectSpaceState;
 				var query = PhysicsRayQueryParameters3D.Create(this.GlobalPosition,
 					-_camera.GlobalTransform.Basis.Z * 100f);
 				var result = spaceState.IntersectRay(query);
+				// _cameraAngle += recoil/(24 * Mathf.Pi);
+				// _camera.Rotation = new Vector3(
+				// 	_cameraAngle,
+				// 	_camera.Rotation.Y,
+				// 	_camera.Rotation.Z
+				// );
+				// jiggle.physics = true ##with boobies/booties
+				
 				if (result.Count > 0)
 				{
-					GD.Print("Hit at point: ", result["position"]);
+					// GD.Print("Hit at point: ", result["position"]);
 					_particles.GlobalPosition = result["position"].AsVector3();
 					_particles.Emitting = true;
-					// if (result["collider"].) {
-					// 	var collider = (RigidBody3D)result["collider"];
-					// 	collider.ApplyImpulse(-_camera.GlobalTransform.Basis.Z * 100f,(Vector3) result["position"]);
-					// 	GD.Print(collider.GlobalPosition);
-					// }
+					if (result["collider"].AsGodotObject() is RigidBody3D collider) {
+						collider.ApplyImpulse(-_camera.GlobalTransform.Basis.Z * recoil,(Vector3) result["position"]);
+						// self.ApplyImpulse(-_camera.GlobalTransform.Basis.Z * recoil); //TODO add this back once both characters are combined
+						if (collider.HasMeta("health")) {
+							var damage = 10f;
+							collider.SetMeta("health", (float) collider.GetMeta("health")- damage);
+						}
+					}
 				}
 			}
 		}
