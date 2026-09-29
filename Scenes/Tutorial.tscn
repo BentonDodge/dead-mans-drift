@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://di5jxpyykbwvs"]
 
-[ext_resource type="PackedScene" uid="uid://b5mdwuctxnbx6" path="res://Scenes/turret.tscn" id="1_wduq8"]
+[ext_resource type="PackedScene" uid="uid://bwxfnwvtwe8v0" path="res://Scenes/vehicle.tscn" id="1_wduq8"]
 
 [sub_resource type="Environment" id="Environment_wduq8"]
 background_mode = 1
@@ -30,7 +30,7 @@ size = Vector3(15, 20, 5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_7bloo"]
 
-[node name="Tutorial" type="Node3D" unique_id=565982458]
+[node name="Tutorial" type="Node" unique_id=1088950478]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2015769653]
 environment = SubResource("Environment_wduq8")
@@ -78,4 +78,4 @@ shape = SubResource("BoxShape3D_uo1fs")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D/CollisionShape3D" unique_id=323275979]
 mesh = SubResource("BoxMesh_7bloo")
 
-[node name="Turret" parent="." unique_id=841247097 instance=ExtResource("1_wduq8")]
+[node name="Body" parent="." unique_id=947025801 instance=ExtResource("1_wduq8")]

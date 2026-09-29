@@ -1,7 +1,8 @@
 using Godot;
-using System;
 
-public partial class turret : Node3D
+namespace DeadMansDrift.Turrets.Scripts;
+
+public partial class Turret : Node3D
 {
 	[Export] public float MouseSensitivity = 0.002f;
 	[Export] private Camera3D _camera;

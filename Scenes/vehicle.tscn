@@ -1,7 +1,11 @@
 [gd_scene format=3 uid="uid://bwxfnwvtwe8v0"]
 
-[ext_resource type="Script" uid="uid://bgyqyjf40w8i4" path="res://Vehicles/Scripts/car.cs" id="1_v0iea"]
+[ext_resource type="Script" uid="uid://bfyqgb36335ci" path="res://Vehicles/Scripts/Car.cs" id="1_3ngla"]
 [ext_resource type="ArrayMesh" uid="uid://de03moawktuc0" path="res://Vehicles/Resources/DMDPlaceholderCar.obj" id="2_cvnsp"]
+
+[sub_resource type="Curve" id="Curve_2o727"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_cvnsp"]
 top_radius = 0.93
@@ -11,15 +15,15 @@ height = 0.8
 [sub_resource type="BoxShape3D" id="BoxShape3D_0hbge"]
 size = Vector3(4.422576, 2.5, 13)
 
-[node name="Body" type="VehicleBody3D" unique_id=947025801 node_paths=PackedStringArray("_cameraPivot", "_camera", "_rightRearWheel", "_leftRearWheel")]
+[node name="Body" type="VehicleBody3D" unique_id=947025801 node_paths=PackedStringArray("_camera", "_cameraPivot", "_leftRearWheel", "_rightRearWheel")]
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, 0, 0.4)
-script = ExtResource("1_v0iea")
-gears = PackedFloat32Array(3.8, 2, 1.3, 0.975, 0.824, 0.634)
-_cameraPivot = NodePath("CameraPivot")
+script = ExtResource("1_3ngla")
 _camera = NodePath("CameraPivot/Camera3D")
-_rightRearWheel = NodePath("RearPassengerSideWheel")
+_cameraPivot = NodePath("CameraPivot")
 _leftRearWheel = NodePath("RearDriverSideWheel")
+_rightRearWheel = NodePath("RearPassengerSideWheel")
+_powerCurve = SubResource("Curve_2o727")
 
 [node name="FrontDriverSideWheel" type="VehicleWheel3D" parent="." unique_id=787399239]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2687554, -0.9573135, 4.3370266)
