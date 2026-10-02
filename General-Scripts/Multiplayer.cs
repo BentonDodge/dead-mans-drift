@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Godot;
 
 namespace DeadMansDrift.General_Scripts;
@@ -59,12 +58,17 @@ public partial class Multiplayer : Node
             InputMap.ActionAddEvent("hand_brake", new InputEventJoypadButton()
             {
                 Device = device,
-                ButtonIndex = JoyButton.A,
+                ButtonIndex = JoyButton.RightShoulder,
             });
             InputMap.ActionAddEvent("NOS", new InputEventJoypadButton()
             {
                 Device = device,
                 ButtonIndex = JoyButton.B,
+            });
+            InputMap.ActionAddEvent("jump", new InputEventJoypadButton()
+            {
+                Device = device,
+                ButtonIndex = JoyButton.A,
             });
             InputMap.ActionAddEvent("shift up", new InputEventJoypadButton()
             {
@@ -94,6 +98,47 @@ public partial class Multiplayer : Node
         }
         else
         {
+            InputMap.ActionAddEvent("look_up", new InputEventJoypadMotion()
+            {
+                Device = device,
+                Axis = JoyAxis.RightY,
+                AxisValue = 1.0f
+            });
+            InputMap.ActionAddEvent("look_down", new InputEventJoypadMotion()
+            {
+                Device = device,
+                Axis = JoyAxis.RightY,
+                AxisValue = -1.0f
+            });
+            InputMap.ActionAddEvent("look_left", new InputEventJoypadMotion()
+            {
+                Device = device,
+                Axis = JoyAxis.RightX,
+                AxisValue = -1.0f
+            });
+            InputMap.ActionAddEvent("look_right", new InputEventJoypadMotion()
+            {
+                Device = device,
+                Axis = JoyAxis.RightX,
+                AxisValue = 1.0f
+            });
+            InputMap.ActionAddEvent("ability", new InputEventJoypadButton()
+            {
+                Device = device,
+                ButtonIndex = JoyButton.X,
+            });
+            InputMap.ActionAddEvent("shoot", new InputEventJoypadMotion()
+            {
+                Device = device,
+                Axis = JoyAxis.TriggerRight,
+                AxisValue = 1.0f
+            });
+            InputMap.ActionAddEvent("aim", new InputEventJoypadMotion()
+            {
+                Device = device,
+                Axis = JoyAxis.TriggerLeft,
+                AxisValue = 1.0f
+            });
             
         }
     }

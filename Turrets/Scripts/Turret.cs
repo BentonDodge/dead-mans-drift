@@ -16,12 +16,13 @@ public partial class Turret : Node3D
 		Input.MouseMode = Input.MouseModeEnum.Captured;
 		_camera = GetNode<Camera3D>("Camera3D");
 		_particles.Emitting = false;
+		TopLevel = false;//TODO find better solution
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		if (Input.IsMouseButtonPressed(MouseButton.Right))
+		if (Input.IsActionPressed("aim"))
 		{
 			_camera.Fov = 40f;
 
@@ -80,6 +81,11 @@ public partial class Turret : Node3D
 					}
 				}
 			}
+		// }else if (@event is )
+		// {
+			
+			
+			
 		}
 	}
 }

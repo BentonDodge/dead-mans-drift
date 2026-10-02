@@ -174,7 +174,7 @@ public partial class Car : VehicleBody3D
 		_revs = Mathf.Clamp(_revs, _idleRevs, _maxEngineRevs);
 		// GD.Print(_powerCurve.SampleBaked(Mathf.Clamp(_revs / _maxEngineRevs, 0f, 1.0f)));
 		return _powerCurve.SampleBaked(Mathf.Clamp(_revs / _maxEngineRevs, 0f, 1.0f)) *
-			   Input.GetAxis("back", "forward") *
+			   Input.GetAxis("back", "forward")*
 			   _finalDrive *
 			   _gears[_currentGear] *
 			   _maxEngineForce;

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bfyqgb36335ci" path="res://Vehicles/Scripts/Car.cs" id="1_3ngla"]
 [ext_resource type="ArrayMesh" uid="uid://de03moawktuc0" path="res://Vehicles/Resources/DMDPlaceholderCar.obj" id="2_cvnsp"]
+[ext_resource type="PackedScene" uid="uid://b5mdwuctxnbx6" path="res://Scenes/turret.tscn" id="3_hvehr"]
 
 [sub_resource type="Curve" id="Curve_2o727"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -19,7 +20,7 @@ size = Vector3(4.422576, 2.5, 13)
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, 0, 0.4)
 script = ExtResource("1_3ngla")
-_camera = NodePath("CameraPivot/Camera3D")
+_camera = NodePath("CameraPivot/SubViewport/Camera3D")
 _cameraPivot = NodePath("CameraPivot")
 _leftRearWheel = NodePath("RearDriverSideWheel")
 _rightRearWheel = NodePath("RearPassengerSideWheel")
@@ -93,9 +94,14 @@ mesh = ExtResource("2_cvnsp")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8639846, -1.3519739)
 top_level = true
 
-[node name="Camera3D" type="Camera3D" parent="CameraPivot" unique_id=1232867108]
-transform = Transform3D(-1, 8.959764e-16, -8.742281e-08, -1.4489117e-08, 0.9861702, 0.16573614, 8.621376e-08, 0.16573614, -0.9861702, 0, 5.9494386, -14.4215555)
+[node name="SubViewport" type="SubViewport" parent="CameraPivot" unique_id=347655346]
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot/SubViewport" unique_id=1232867108]
+transform = Transform3D(-1, 8.959764e-16, -8.742281e-08, -1.4489117e-08, 0.9861702, 0.16573614, 8.621376e-08, 0.16573614, -0.9861702, 0, 6.813423, -15.773529)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1848688526]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.040511608, 0.2751943, 0.23099999)
 shape = SubResource("BoxShape3D_0hbge")
+
+[node name="Turret" parent="." unique_id=841247097 instance=ExtResource("3_hvehr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.3836493, -3.5527833)

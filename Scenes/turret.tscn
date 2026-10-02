@@ -1,17 +1,17 @@
 [gd_scene format=3 uid="uid://b5mdwuctxnbx6"]
 
-[ext_resource type="Script" uid="uid://f28f1fjfnlpc" path="res://Turrets/Scripts/turret.cs" id="1_fcprl"]
+[ext_resource type="Script" uid="uid://dy31uh0cught" path="res://Turrets/Scripts/Turret.cs" id="1_fcprl"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n2xce"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_n2xce"]
 
+[sub_resource type="SphereMesh" id="SphereMesh_34anh"]
+
 [node name="Turret" type="Node3D" unique_id=841247097 node_paths=PackedStringArray("_camera", "_particles")]
 script = ExtResource("1_fcprl")
 _camera = NodePath("Camera3D")
 _particles = NodePath("CPUParticles3D")
-
-[node name="Camera3D" type="Camera3D" parent="." unique_id=872203612]
 
 [node name="CPUParticles3D" type="CPUParticles3D" parent="." unique_id=84240638]
 top_level = true
@@ -24,3 +24,11 @@ initial_velocity_max = 400.0
 angular_velocity_min = 20.0
 angular_velocity_max = 100.0
 color = Color(1, 0.43529412, 0.13333334, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1220239172]
+mesh = SubResource("SphereMesh_34anh")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=872203612]
+fov = 72.24607
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=1718098150]
